@@ -1,0 +1,6 @@
+/school
+**/dev
+*.wav
+.*
+
+!.gitignore

@@ -1,0 +1,7 @@
+#N canvas 769 270 569 416 12;
+#X obj 76 54 oscillator;
+#X obj 184 52 oscillator;
+#X obj 85 322 outlet~;
+#X obj 174 320 outlet~;
+#X connect 0 0 2 0;
+#X connect 1 0 3 0;
