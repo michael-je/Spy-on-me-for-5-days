@@ -8,7 +8,7 @@ NICK = secrets.NICK
 CHAN = secrets.CHAN
 PASS = secrets.PASS
 
-threads_delay = 0.1 # delay time inserted into thread loops in seconds
+threads_delay = 1 # delay time inserted into thread loops in seconds
 twitch_chat_spam_filter_seconds = 2 # how long the spam filter should ignore messages after last received
 
 # commands
