@@ -1,0 +1,29 @@
+<!DOCTYPE patchbay>
+<patchbay name="jack_patchbay_1" version="0.5.0">
+ <output-sockets>
+  <socket name="pd_out" client="pure_data" exclusive="on" type="jack-audio">
+   <plug>output0</plug>
+   <plug>output1</plug>
+  </socket>
+  <socket name="vlc_[0-9]+ 1" client="vlc_[0-9]+" exclusive="on" type="jack-audio">
+   <plug>vlc_[0-9]+_out_1</plug>
+   <plug>vlc_[0-9]+_out_2</plug>
+  </socket>
+ </output-sockets>
+ <input-sockets>
+  <socket name="pd_in" client="pure_data" exclusive="on" type="jack-audio">
+   <plug>input0</plug>
+   <plug>input1</plug>
+  </socket>
+  <socket name="system_in" client="system" exclusive="on" type="jack-audio">
+   <plug>playback_1</plug>
+   <plug>playback_2</plug>
+  </socket>
+ </input-sockets>
+ <slots/>
+ <cables>
+  <cable output="pd_out" input="system_in" type="jack-audio"/>
+  <cable output="vlc_[0-9]+ 1" input="pd_in" type="jack-audio"/>
+ </cables>
+</patchbay>
+
