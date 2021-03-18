@@ -2,5 +2,6 @@
 **/dev
 *.wav
 .*
+secrets.py
 
 !.gitignore
