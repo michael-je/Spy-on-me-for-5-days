@@ -11,4 +11,13 @@ CHAN = secrets.CHAN # streaming channel name
 threads_delay = 1 # delay time inserted into thread loops in seconds
 twitch_chat_spam_filter_seconds = 2 # how long the spam filter should ignore messages after last received
 
-# commands
+# refer to the example for correct protocol
+# use the keyword None if no parameters are needed at an index
+command_matches = {
+	"example":[
+		["word", "or", "words", "to"], # match against any word in this list
+		["match this phrase"], # match against any exact phrase in this list
+		[0, 127], # numeric range to match
+		"obs", # which program interface to target
+	]
+}
