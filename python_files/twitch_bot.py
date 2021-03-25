@@ -11,6 +11,11 @@ from time import sleep
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
 CHAT_MSG_SENDER = re.compile(r"^:\w+")
 
+# interface functions to be called once a command match is found
+interface_func_calls = {
+	"obs":obs_interface.main
+}
+
 
 def main() -> None:
 	s = socket.socket()
@@ -80,7 +85,13 @@ def connect(s) -> None:
 def parse_commands(message, sender_username) -> None:
 	"""Compare message against command_matches in cfg.py
 	If we get a match then call the appropriate interface to process it"""
-	pass
+	word_list = message.split()
+	for word in word_list:
+		for cmd in cfg.command_matches:
+			print(word, cmd)
+			if word in cmd[2]:
+				interface_func_calls.get(cmd[1])(cmd[0], message, sender_username)
+
 
 
 if __name__ == "__main__":
