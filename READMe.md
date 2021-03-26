@@ -6,6 +6,7 @@
 - Pure Data
 - vlc
 - qjackctl (via apt)
+- QLC+
 
 ### Pd externals
 - zexy
