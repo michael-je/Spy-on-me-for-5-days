@@ -4,6 +4,7 @@ import asyncio
 from obswsrc import OBSWS
 from obswsrc.requests import ResponseStatus, SetCurrentSceneRequest
 
+loop = asyncio.get_event_loop()
 
 async def send_command(command):
 
@@ -19,11 +20,8 @@ async def send_command(command):
 def main(*args):
 	command, *_ = args
 	print("obs_main: ", command)
-
-	loop = asyncio.get_event_loop()
 	loop.run_until_complete(send_command(command))
+
+
+def close_loop():
 	loop.close()
-
-
-
-
