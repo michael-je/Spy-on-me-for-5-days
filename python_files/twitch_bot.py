@@ -3,9 +3,11 @@ import states
 import pd_interface
 import obs_interface
 
+import importlib
 import socket
 import re
 from time import sleep
+from time import time
 
 # compile regex to match twitch's message formatting
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
@@ -13,7 +15,8 @@ CHAT_MSG_SENDER = re.compile(r"^:\w+")
 
 # interface functions to be called once a command match is found
 interface_func_calls = {
-	"obs":obs_interface.main
+	"obs":obs_interface.main,
+	"pd": pd_interface.main
 }
 
 
@@ -24,6 +27,8 @@ def main() -> None:
 
 	while not states.terminate_flag:
 		try:
+			importlib.reload(cfg)
+
 			# separate individual messages
 			response_buffer = s.recv(1024).decode("utf-8")
 			seperated_responses = [x for x in response_buffer.split('\r\n') if x]
@@ -34,14 +39,21 @@ def main() -> None:
 				if raw_response == "PING :tmi.twitch.tv": # reply to server pings
 					s.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
 					print("PONG sent.")
+				
 				else:
 					# parse raw messages for message and user data,
 					# pass data to parsing function
 					message = CHAT_MSG.sub("", raw_response)
 					sender_username = CHAT_MSG_SENDER.search(raw_response).group()[1:]
+					
 					if message.find('tmi.twitch.tv') == -1 and message:
-						print(f"{sender_username}: {message}") # debug
-						parse_commands(message, sender_username)
+						print(f"\n{sender_username}: {message}") # debug
+						cmd_info = parse_commands(message, sender_username)
+						print(cmd_info)
+
+						if cmd_info[0]:
+							interface_func_calls.get(cmd_info[1])(cmd_info, message, sender_username)
+
 
 		# this exception is raised if there is no data in the recv buffer,
 		# we want to ignore it and keep running
@@ -82,15 +94,58 @@ def connect(s) -> None:
 		sleep(cfg.threads_delay)
 
 
-def parse_commands(message, sender_username) -> None:
+def parse_commands(message, sender_username) -> list:
 	"""Compare message against command_matches in cfg.py
-	If we get a match then call the appropriate interface to process it"""
-	word_list = message.split()
+	matches are returned as lists along with relevant data in the form
+	[interface, word_match, number_match, argument_match]"""
+	start = time()
+
+	message = message.lower()
+	message = message.strip()
+
+	cmd_info = [None, None, None, None, None, None]
+	word_list = message.split()[:10] # only check first 10 words
 	for word in word_list:
+
+		# return at most one command per message
 		for cmd in cfg.command_matches:
-			print(word, cmd)
-			if word in cmd[2]:
-				interface_func_calls.get(cmd[1])(cmd[0], message, sender_username)
+			
+			if cmd[2] and word in cmd[2]: 		# check if any of the words match command keywords
+				cmd_info[0] = cmd[0]
+				cmd_info[1] = cmd[1]
+				cmd_info[2] = word
+				break
+
+			elif cmd[3] and message in cmd[3]:	# check if the message matches an exact phrase
+				cmd_info[0] = cmd[0]
+				cmd_info[1] = cmd[1]
+				cmd_info[3] = word
+				break
+
+		if cmd_info[0]:
+			break
+
+	if cmd_info[0]:
+		for word in word_list:
+
+			for cmd in cfg.command_matches:
+
+				if cmd[4] and word.isnumeric():	# check numeric range
+					if cmd[4][0] < word < cmd[4][1]:
+						cmd_info[4] = word
+
+				if cmd[5] and word in cmd[5]:	# check for arguments
+					cmd_info[5] = word
+
+				if cmd_info[4] and cmd_info[5]:
+					break
+
+			if cmd_info[4] and cmd_info[5]:
+				break
+
+	end = time()
+	print(end - start)
+	return cmd_info
 
 
 

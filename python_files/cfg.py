@@ -17,16 +17,18 @@ twitch_chat_spam_filter_seconds = 2 # how long the spam filter should ignore mes
 # use the keyword None if no parameters are needed at an index
 command_matches = [
 	[
-		"command name", 					# command name
-		"obs", 								# which program interface to target 
-		["match", "any", "of", "these"], 	# match against any word in this list
-		["match this phrase"], 				# match against any exact phrase in this list
-		[0, 127], 							# numeric range to match
+		"command name", 					# 0 command name
+		"obs", 								# 1 which program interface to target 
+		["match", "any", "of", "these"], 	# 2 match against any word in this list
+		["match this phrase"], 				# 3 match against any exact phrase in this list
+		[0, 127], 							# 4 if match, check this numeric range
+		["extra argument"]					# 5 if match, then also search for this
 	],
 	[
 		"desktop",
 		"obs",
-		["desktop"], 
+		["desktop", "screen","ass"], 
+		None,
 		None,
 		None,
 	],
@@ -36,6 +38,7 @@ command_matches = [
 		["front", "face", "facecam"],
 		None,
 		None,
+		None,
 	],
 	[
 		"roomcam",
@@ -43,5 +46,14 @@ command_matches = [
 		["room"],
 		None,
 		None,
+		None,
+	],
+	[
+		"dmx",
+		"pd",
+		["light", "lights", "disco"],
+		None,
+		None,
+		["on", "off"]
 	]
 ]

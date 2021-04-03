@@ -18,7 +18,8 @@ async def send_command(command):
 
 
 def main(*args):
-	command, *_ = args
+	cmd_info, *_ = args
+	command = cmd_info[0]
 	print("obs_main: ", command)
 	loop.run_until_complete(send_command(command))
 
