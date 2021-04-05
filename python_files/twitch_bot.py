@@ -2,6 +2,7 @@ import cfg
 import states
 import pd_interface
 import obs_interface
+import rpi_interface
 
 import importlib
 import socket
@@ -16,7 +17,8 @@ CHAT_MSG_SENDER = re.compile(r"^:\w+")
 # interface functions to be called once a command match is found
 interface_func_calls = {
 	"obs":obs_interface.main,
-	"pd": pd_interface.main
+	"pd": pd_interface.main,
+	"rpi": rpi_interface.main
 }
 
 
@@ -49,7 +51,6 @@ def main() -> None:
 					if message.find('tmi.twitch.tv') == -1 and message:
 						print(f"\n{sender_username}: {message}") # debug
 						cmd_info = parse_commands(message, sender_username)
-						print(cmd_info)
 
 						if cmd_info[0]:
 							interface_func_calls.get(cmd_info[1])(cmd_info, message, sender_username)

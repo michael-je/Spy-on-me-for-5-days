@@ -6,6 +6,7 @@ from obswsrc.requests import ResponseStatus, SetCurrentSceneRequest
 
 loop = asyncio.get_event_loop()
 
+
 async def send_command(command):
 
 	async with OBSWS('localhost', 4444, secrets.obs_wss_pass) as obsws:
@@ -20,7 +21,7 @@ async def send_command(command):
 def main(*args):
 	cmd_info, *_ = args
 	command = cmd_info[0]
-	print("obs_main: ", command)
+	print("obs send: ", command)
 	loop.run_until_complete(send_command(command))
 
 
