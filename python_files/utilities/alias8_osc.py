@@ -3,14 +3,7 @@ from rtmidi.midiutil import open_midiinput
 from time import sleep
 
 local_IP = "127.0.0.1"
-pi_IP = "192.168.1.227"
-
-print("\nWhere would you like to connect?")
-selection = input("local/pi? > ")
-if selection == "pi" or selection == "p":
-	UDP_IP = pi_IP
-else:
-	UDP_IP = local_IP
+UDP_IP = local_IP
 
 # variables
 # UDP_IP =  override
