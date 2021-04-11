@@ -21,7 +21,7 @@ rpi_osc_port = 7691
 
 # local ip addresses
 desktop_ip = "192.168.1.225"
-rpi_ip = "192.168.1.227"
+rpi_ip = "192.168.1.110"
 
 # arduino
 arduino_com_port = "/dev/ttyACM0"
