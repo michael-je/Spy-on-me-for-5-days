@@ -1,3 +1,5 @@
+# pylint: skip-file
+
 import cfg
 
 from pythonosc import osc_server, dispatcher

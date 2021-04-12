@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # launch main pd_sketch, sleep to give it time to connect to jack
-pd $(cd ../ && pwd)/pd_files/main_palette/palette1.pd &
-sleep 1
+#pd $(cd ../ && pwd)/pd_files/main_palette/palette1.pd &
+#sleep 1
 
 # launch catia
 catia &
