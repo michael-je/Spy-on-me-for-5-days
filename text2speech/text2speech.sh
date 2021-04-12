@@ -4,7 +4,7 @@
 pico2wave -w=/tmp/t2s.wav "$1"
 
 # ---- 
-./expect_script.exp && rm /tmp/t2s.wav &
+$(dirname $(realpath $0))/expect_script.exp && rm /tmp/t2s.wav &
 
 # give mpv some time to initialize
 sleep 0.3
