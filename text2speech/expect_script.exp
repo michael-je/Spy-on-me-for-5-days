@@ -16,7 +16,7 @@ if {$force_conservative} {
 
 # run mpv
 set timeout -1
-spawn mpv --ao=jack --speed=0.80 /tmp/t2s.wav
+spawn mpv --ao=jack --speed=0.7 /tmp/t2s.wav
 match_max 100000
 
 # let mpv play for a split second so that it connects with jack, then pause
