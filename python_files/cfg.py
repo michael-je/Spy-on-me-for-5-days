@@ -1,5 +1,6 @@
 import secrets
 
+from datetime import datetime
 
 
 # ============================= TWITCH =====================================
@@ -16,6 +17,7 @@ except AttributeError:
 	NICK = "NICK"
 	PASS = "PASS"
 	CHAN = "CHAN"
+enable_time = False # whether or not to check for when commands become available
 
 
 
@@ -41,6 +43,7 @@ arduino_baud_rate = 9600
 t2s_script_relative_path = "/../text2speech/text2speech.sh"
 replacement_words = ["flower,", "kitty,", "sunshine,", "happy,", "wonderful,", "sexy", "handsome", "dreamy"]
 lenrp = len(replacement_words)
+# list from https://github.com/MauriceButler/badwords
 blacklisted_words = ["anal", "anus", "arrse", "arse", "ass", "ass-fucker", 
 	"asses", "assfucker", "assfukka", "asshole", "assholes", "asswhole", 
 	"ballbag", "balls", "ballsack", "bastard", "beastial", "beastiality", "bestial", "bestiality", 
@@ -102,7 +105,17 @@ command_matches = [
 		["match", "any", "of", "these"], 	# 2 match against any word in this list
 		["match this phrase"], 				# 3 match against any exact phrase in this list
 		[0, 127], 							# 4 if match, check this numeric range
-		["extra argument"]					# 5 if match, then also search for this
+		["extra argument"],					# 5 if match, then also search for this
+		datetime(2021, 1, 1, 12, 0, 0)		# 6 time when command becomes available
+	],
+	[
+		"text2speech",
+		"text2speech",
+		["!say"],
+		None,
+		None,
+		None,
+		None
 	],
 	[
 		"desktop",
@@ -111,6 +124,7 @@ command_matches = [
 		None,
 		None,
 		None,
+		None
 	],
 	[
 		"facecam",
@@ -119,6 +133,7 @@ command_matches = [
 		None,
 		None,
 		None,
+		None
 	],
 	[
 		"roomcam",
@@ -127,6 +142,7 @@ command_matches = [
 		None,
 		None,
 		None,
+		None
 	],
 	[
 		"dmx",
@@ -134,7 +150,8 @@ command_matches = [
 		["light", "lights", "disco"],
 		None,
 		None,
-		["on", "off"]
+		["on", "off"],
+		None,
 	],
 	[
 		"series",
@@ -142,7 +159,8 @@ command_matches = [
 		["series"],
 		None,
 		None,
-		["on", "off", "brighter", "dimmer"]
+		["on", "off", "brighter", "dimmer"],
+		None,
 	],
 	[
 		"lamp",
@@ -150,6 +168,7 @@ command_matches = [
 		["lamp"],
 		None,
 		None,
-		["on", "off"]
+		["on", "off"],
+		None
 	]
 ]
