@@ -22,3 +22,6 @@
 - python-osc
 - python-rtmidi
 - obs-ws-rc
+
+### Other
+- Animal sounds: https://freeanimalsounds.org/downloads/

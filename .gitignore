@@ -3,7 +3,10 @@ __pycache__
 /school
 /obs_recordings
 **/dev
+
 *.wav
+*.mp3
+
 .*
 secrets.py
 
