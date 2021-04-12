@@ -1,8 +1,7 @@
 import cfg
+import utilities
 import states
-import pd_interface
-import obs_interface
-import rpi_interface
+
 
 import importlib
 import socket
@@ -13,13 +12,6 @@ from time import time
 # compile regex to match twitch's message formatting
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
 CHAT_MSG_SENDER = re.compile(r"^:\w+")
-
-# interface functions to be called once a command match is found
-interface_func_calls = {
-	"obs":obs_interface.main,
-	"pd": pd_interface.main,
-	"rpi": rpi_interface.main
-}
 
 
 def main() -> None:
@@ -53,7 +45,7 @@ def main() -> None:
 						cmd_info = parse_commands(message, sender_username)
 
 						if cmd_info[0]:
-							interface_func_calls.get(cmd_info[1])(cmd_info, message, sender_username)
+							utilities.call_interface(cmd_info, message, sender_username)
 
 
 		# this exception is raised if there is no data in the recv buffer,
@@ -105,7 +97,7 @@ def parse_commands(message, sender_username) -> list:
 	message = message.strip()
 
 	cmd_info = [None, None, None, None, None, None]
-	word_list = message.split()[:10] # only check first 10 words
+	word_list = message.split()[:10] # only check first 10 words for commands
 	for word in word_list:
 
 		# return at most one command per message

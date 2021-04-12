@@ -9,7 +9,13 @@ file_dir = os.path.abspath(os.path.join(file_path, os.path.pardir))
 t2s_script_path = file_dir + cfg.t2s_script_relative_path
 
 
-def text2speech(text) -> None:
+def text2speech(_commands, message, sender_username) -> None:
+    message = message[5:] # remove the "!say " at the beginning of message
+    text = f"{sender_username} says: {message}"
+    speak(text)
+
+
+def speak(text) -> None:
     """calls the text2speech shell script"""
     text = filter_text(text)
     subprocess.call([t2s_script_path, text])
@@ -29,6 +35,3 @@ def filter_text(text) -> str:
 
     filtered_text = ' '.join(filtered_word_list)
     return filtered_text
-
-
-print(text2speech("Michael, you are a fucking ass_fucker n1gga"))
