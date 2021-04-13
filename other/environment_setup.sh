@@ -8,12 +8,12 @@
 catia &
 
 # run jack_setup.sh
-./jack_setup.sh
+$(dirname $(realpath $0))/jack_setup.sh
 
 # alias8 python script
-python3 $(cd ../ && pwd)/python_files/utilities/alias8_osc.py &
+# python3 $(dirname $(realpath $0))/../python_files/utilities/alias8_osc.py &
 
 # twitch bot python script
-python3 $(cd ../ && pwd)/python_files/twitch_bot.py
+# python3 $(dirname $(realpath $0))/../python_files/twitch_bot.py
 
 # launch obs
