@@ -7,6 +7,7 @@ from datetime import datetime
 # connection to twitch server
 HOST = "irc.chat.twitch.tv"
 PORT = 6667
+
 # credentials for twitch bot account are stored in a separate file
 try:
 	NICK = secrets.NICK # bot channel name
@@ -17,8 +18,10 @@ except AttributeError:
 	NICK = "NICK"
 	PASS = "PASS"
 	CHAN = "CHAN"
+
 enable_time = False # whether or not to check for when commands become available
 
+chat_log_relative_path = "/../other/.chat_log"
 
 
 # ============================= OSC ========================================
@@ -98,8 +101,8 @@ twitch_chat_spam_filter_seconds = 2 # how long the spam filter should ignore mes
 # ============================= COMMANDS ===================================
 # refer to the example for correct protocol
 # use the keyword None if no parameters are needed at an index
-command_matches = [
-	[
+command_matches = {
+	"command name":[
 		"command name", 					# 0 command name
 		"obs", 								# 1 which program interface to target 
 		["match", "any", "of", "these"], 	# 2 match against any word in this list
@@ -108,16 +111,16 @@ command_matches = [
 		["extra argument"],					# 5 if match, then also search for this
 		datetime(2021, 1, 1, 12, 0, 0)		# 6 time when command becomes available
 	],
-	[
+	"text2speech":[
 		"text2speech",
 		"text2speech",
 		["!say"],
 		None,
 		None,
 		None,
-		None
+		datetime(2020, 1, 1, 12, 0, 0)
 	],
-	[
+	"desktop":[
 		"desktop",
 		"obs",
 		["desktop", "screen","ass"], 
@@ -126,7 +129,7 @@ command_matches = [
 		None,
 		None
 	],
-	[
+	"facecam":[
 		"facecam",
 		"obs",
 		["front", "face", "facecam"],
@@ -135,7 +138,7 @@ command_matches = [
 		None,
 		None
 	],
-	[
+	"roomcam":[
 		"roomcam",
 		"obs",
 		["room"],
@@ -144,7 +147,7 @@ command_matches = [
 		None,
 		None
 	],
-	[
+	"dmx":[
 		"dmx",
 		"pd",
 		["light", "lights", "disco"],
@@ -153,7 +156,7 @@ command_matches = [
 		["on", "off"],
 		None,
 	],
-	[
+	"series":[
 		"series",
 		"rpi",
 		["series"],
@@ -162,7 +165,7 @@ command_matches = [
 		["on", "off", "brighter", "dimmer"],
 		None,
 	],
-	[
+	"lamp":[
 		"lamp",
 		"rpi",
 		["lamp"],
@@ -171,4 +174,4 @@ command_matches = [
 		["on", "off"],
 		None
 	]
-]
+}

@@ -30,8 +30,6 @@ def main() -> None:
 
 	while not states.terminate_flag:
 		try:
-			importlib.reload(cfg)
-
 			# separate individual messages
 			response_buffer = s.recv(1024).decode("utf-8")
 			seperated_responses = [x for x in response_buffer.split('\r\n') if x]
@@ -56,7 +54,7 @@ def main() -> None:
 						with open(chat_log_path, 'a') as chat_log:
 							logstring = f"{time} - {sender}: {message}" + "\n"
 							chat_log.write(logstring)
-							print(logstring) # debug
+							print(logstring.strip()) # debug
 						cmd_info = parse_commands(message, sender_username)
 
 						if cmd_info[0]:
@@ -105,18 +103,20 @@ def connect(s) -> None:
 def parse_commands(message, sender_username) -> list:
 	"""Compare message against command_matches in cfg.py
 	matches are returned as lists along with relevant data in the form
-	[interface, word_match, number_match, argument_match]"""
-	start = time()
-
+	[command_name, interface, word_match, number_match, argument_match, lock_datetime_object]
+	Returns only the first command that the message matches, and only checks first 10 words of the message"""
+	# first reload cfg
+	importlib.reload(cfg)
+	
 	message = message.lower()
 	message = message.strip()
 
-	cmd_info = [None, None, None, None, None, None]
+	cmd_info = [None, None, None, None, None, None, None]
 	word_list = message.split()[:10] # only check first 10 words for commands
+	# this block checks for matches
 	for word in word_list:
 
-		# return at most one command per message
-		for cmd in cfg.command_matches:
+		for cmd in cfg.command_matches.values():
 			
 			if cmd[2] and word in cmd[2]: 		# check if any of the words match command keywords
 				cmd_info[0] = cmd[0]
@@ -133,28 +133,25 @@ def parse_commands(message, sender_username) -> list:
 		if cmd_info[0]:
 			break
 
+	# checks for extra arguments and appends datetime lock to cmd_info
+	# block only runs if match was found
 	if cmd_info[0]:
+		cmd = cfg.command_matches.get(cmd_info[0])
 		for word in word_list:
 
-			for cmd in cfg.command_matches:
+			if cmd[4] and word.isnumeric():	# check numeric range
+				if cmd[4][0] < word < cmd[4][1]:
+					cmd_info[4] = word
 
-				if cmd[4] and word.isnumeric():	# check numeric range
-					if cmd[4][0] < word < cmd[4][1]:
-						cmd_info[4] = word
+			if cmd[5] and word in cmd[5]:	# check for arguments
+				cmd_info[5] = word
 
-				if cmd[5] and word in cmd[5]:	# check for arguments
-					cmd_info[5] = word
-
-				if cmd_info[4] and cmd_info[5]:
+			if cmd_info[4] and cmd_info[5]: # break early if both arguments where satisfied
 					break
 
-			if cmd_info[4] and cmd_info[5]:
-				break
+		cmd_info[6] = cmd[6]
 
-	end = time()
-	print(end - start)
 	return cmd_info
-
 
 
 if __name__ == "__main__":
