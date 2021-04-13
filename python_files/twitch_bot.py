@@ -3,6 +3,7 @@
 import cfg
 import utilities
 import states
+import call_interface_util
 
 
 import importlib
@@ -23,6 +24,8 @@ CHAT_MSG_SENDER = re.compile(r"^:\w+")
 
 
 def main() -> None:
+	utilities.set_state("terminate_flag", 0)
+	
 	s = socket.socket()
 	connect(s)
 	s.setblocking(False)
@@ -57,7 +60,7 @@ def main() -> None:
 						cmd_info = parse_commands(message, sender_username)
 
 						if cmd_info[0]:
-							utilities.call_interface(cmd_info, message, sender_username)
+							call_interface_util.call_interface(cmd_info, message, sender_username)
 
 
 		# this exception is raised if there is no data in the recv buffer,
@@ -68,6 +71,7 @@ def main() -> None:
 		try:
 			sleep(cfg.threads_delay)
 		except KeyboardInterrupt:
+			utilities.set_state("terminate_flag", 1)
 			break
 		
 	s.close()

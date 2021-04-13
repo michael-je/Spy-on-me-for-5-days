@@ -42,9 +42,9 @@ arduino_com_port = "/dev/ttyACM0"
 arduino_baud_rate = 9600
 
 
-# ============================= ARDUINO ====================================
-animal_soundfiles_path = "other/"
-animal_sounds_script_path = "other/play_animal_sound.sh"
+# ============================= ANIMAL SOUNDS ==============================
+animal_soundfiles_path = "other/animal_sounds/sound_files"
+animal_sounds_script_path = "other/animal_sounds/play_animal_sound.sh"
 
 
 # ============================= UTILITIES ==================================
@@ -130,6 +130,15 @@ command_matches = {
 		None,
 		None,
 		["on", "off"],
+		None
+	],
+	"random_animal":[
+		"random_animal",
+		"animal_sounds",
+		['!animal'],
+		None,
+		None,
+		None,
 		None
 	]
 }

@@ -1,3 +1,5 @@
+import utilities
+
 from pythonosc import udp_client
 from rtmidi.midiutil import open_midiinput
 from time import sleep
@@ -56,8 +58,15 @@ midiin.set_callback(MidiInputHandler(port_name))
 
 print("Connected to", port_name, "\n")
 
+# check the terminate flag every second
+terminate = False
+cnt = 0
 try:
-	while True:
+	while not terminate:
+		cnt += 1
+		if cnt == 100:
+			cnt = 0
+			terminate = utilities.get_state("terminate_flag")
 		sleep(0.01)
 except KeyboardInterrupt:
 	pass

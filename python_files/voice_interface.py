@@ -4,12 +4,17 @@ import utilities
 import os.path
 import subprocess
 from random import randint
+from time import sleep
 
 # get relative path of shell script
 t2s_script_path = utilities.get_file_path(__file__, cfg.t2s_script_path)
 
 
 def text2speech(_commands, message, sender_username) -> None:
+    # wait for mutex to unlock
+    while utilities.get_state("mpv_mutex"):
+        sleep(0.5)
+    
     message = message[5:] # remove the "!say " at the beginning of message
     text = f"{sender_username} says: {message}"
     speak(text)
@@ -18,6 +23,9 @@ def text2speech(_commands, message, sender_username) -> None:
 def speak(text) -> None:
     """calls the text2speech shell script"""
     text = filter_text(text)
+    # set mutex
+    utilities.set_state("mpv_mutex", 1)
+    # start the mpv script
     subprocess.call([t2s_script_path, text])
 
 

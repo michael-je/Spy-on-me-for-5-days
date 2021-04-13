@@ -1,45 +1,16 @@
 import cfg
-import pd_interface
-import obs_interface
-import rpi_interface
-import voice_interface
 
 from datetime import datetime
-import os.path
-
-# interface functions to be called once a command match is found
-interface_func_calls = {
-	"obs":obs_interface.main,
-	"pd": pd_interface.main,
-	"rpi": rpi_interface.main,
-	"text2speech": voice_interface.text2speech
-}
-
-
-def call_interface(cmd_info, message, sender_username) -> None:
-    """Does some checks and then calls the apporopriate interface to handle the command"""
-    # variable will be set to False if it fails a check
-    command_unlocked = True
-    
-    # check whether the command has been unlocked
-    if cmd_info[6]:
-        if cmd_info[6] >= datetime.now():
-            print(f"utilities: command {cmd_info[0]} is time locked")
-            command_unlocked = False
-        else:
-            print(f"utilities: command {cmd_info[0]} is time unlocked")
-    
-    if command_unlocked:
-        interface_func_calls.get(cmd_info[1])(cmd_info, message, sender_username)
+import os.path as path
 
 
 def get_file_path(python_file_object, relative_path) -> str:
     """
     gives absolute path from given __file__ object and relative path
     """
-    file_path = os.path.abspath(python_file_object)
-    file_dir = os.path.abspath(os.path.join(file_path, os.path.pardir))
-    file_parent_dir = os.path.abspath(os.path.join(file_dir, os.path.pardir))
+    file_path = path.abspath(python_file_object)
+    file_dir = path.abspath(path.join(file_path, path.pardir))
+    file_parent_dir = path.abspath(path.join(file_dir, path.pardir))
     return file_parent_dir + '/' + relative_path
 
 
@@ -49,7 +20,7 @@ def print_states() -> None:
         print(states.read().strip())
 
 
-def check_state(state_name) -> bool:
+def get_state(state_name) -> bool:
     with open(states_path) as states:
         line = states.readline()
         
@@ -85,6 +56,7 @@ def set_state(arg_state_name, arg_state_status) -> None:
         
         state_file.write(output_text)
 
-    
+
+# ============================= VARIABLES ====================================
 # relative path of states file
 states_path = get_file_path(__file__, cfg.states_path)

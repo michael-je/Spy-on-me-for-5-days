@@ -1,0 +1,2 @@
+mpv_mutex 0
+terminate_flag 1

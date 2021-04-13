@@ -1,4 +1,4 @@
-#N canvas 6 426 1218 772 12;
+#N canvas 1074 563 1218 772 12;
 #X obj 42 41 inlet~;
 #X obj 109 16 r s1;
 #X obj 109 267 vline~;
@@ -20,42 +20,42 @@
 #X obj 394 68 / 127;
 #X obj 327 300 *~, f 10;
 #X obj 394 99 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
--262144 -1 -1 0 1;
+-262144 -1 -1 5200 1;
 #X obj 469 45 inlet~;
 #X obj 536 271 vline~;
 #X msg 536 243 \$1 5;
 #X obj 536 70 / 127;
 #X obj 469 302 *~, f 10;
 #X obj 536 101 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
--262144 -1 -1 0 1;
+-262144 -1 -1 4300 1;
 #X obj 613 45 inlet~;
 #X obj 680 271 vline~;
 #X msg 680 243 \$1 5;
 #X obj 680 70 / 127;
 #X obj 613 302 *~, f 10;
 #X obj 680 101 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
--262144 -1 -1 0 1;
+-262144 -1 -1 4600 1;
 #X obj 755 47 inlet~;
 #X obj 822 273 vline~;
 #X msg 822 245 \$1 5;
 #X obj 822 72 / 127;
 #X obj 755 304 *~, f 10;
 #X obj 822 103 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
--262144 -1 -1 0 1;
+-262144 -1 -1 5600 1;
 #X obj 898 47 inlet~;
 #X obj 965 273 vline~;
 #X msg 965 245 \$1 5;
 #X obj 965 72 / 127;
 #X obj 898 304 *~, f 10;
 #X obj 965 103 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
--262144 -1 -1 7000 1;
+-262144 -1 -1 4200 1;
 #X obj 1040 49 inlet~;
 #X obj 1107 275 vline~;
 #X msg 1107 247 \$1 5;
 #X obj 1107 74 / 127;
 #X obj 1040 306 *~, f 10;
 #X obj 1107 105 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0
-10 -262144 -1 -1 8300 1;
+10 -262144 -1 -1 6200 1;
 #X obj 251 44 r s2;
 #X obj 394 44 r s3;
 #X obj 536 46 r s4;
@@ -66,7 +66,7 @@
 #X obj 1108 586 vline~;
 #X msg 1108 558 \$1 5;
 #X obj 1108 416 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0
-10 -262144 -1 -1 6100 1;
+10 -262144 -1 -1 2500 1;
 #X obj 1108 361 r m;
 #X obj 1108 385 / 127;
 #X obj 42 696 outlet~;
@@ -148,6 +148,7 @@
 #X connect 56 0 68 1;
 #X connect 56 0 70 1;
 #X connect 56 0 74 1;
+#X connect 56 0 72 1;
 #X connect 57 0 56 0;
 #X connect 58 0 57 0;
 #X connect 59 0 60 0;
