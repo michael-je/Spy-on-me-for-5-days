@@ -21,7 +21,9 @@ def text2speech(_commands, message, sender_username) -> None:
 
 
 def speak(text) -> None:
-    """calls the text2speech shell script"""
+    """
+    calls the text2speech shell script
+    """
     text = filter_text(text)
     # set mutex
     utilities.set_state("mpv_mutex", 1)
@@ -30,8 +32,10 @@ def speak(text) -> None:
 
 
 def filter_text(text) -> str:
-    """filters text by checking all words against cfg.blacklisted_words
-    Any matches are replaced with a randomly chosen word from cfg.replacement_words"""
+    """
+    filters text by checking all words against cfg.blacklisted_words
+    Any matches are replaced with a randomly chosen word from cfg.replacement_words
+    """
     filtered_word_list = []
     for word in text.split():
 

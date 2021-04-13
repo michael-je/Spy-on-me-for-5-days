@@ -1,2 +1,2 @@
-mpv_mutex 0
-terminate_flag 1
+mpv_mutex 1
+terminate_flag 0

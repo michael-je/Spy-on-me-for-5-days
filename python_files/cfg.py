@@ -35,7 +35,6 @@ desktop_ip = "192.168.1.225"
 rpi_ip = "192.168.1.110"
 
 
-
 # ============================= ARDUINO ====================================
 # arduino
 arduino_com_port = "/dev/ttyACM0"
@@ -52,8 +51,9 @@ states_path = "other/states.txt"
 
 
 # ============================= MISC =======================================
-threads_delay = 1 # delay time inserted into thread loops in seconds
-twitch_chat_spam_filter_seconds = 2 # how long the spam filter should ignore messages after last received
+threads_delay = 1 								# delay time inserted into thread loops in seconds
+twitch_chat_spam_filter_seconds = 2 			# how long the spam filter should ignore messages after last received
+obs_recording_time_split = 60 * 60 				# how long to wait between recording splits in OBS in seconds
 
 
 # ============================= COMMANDS ===================================
@@ -150,7 +150,7 @@ replacement_words = ["flower,", "kitty,", "sunshine,", "happy,", "wonderful,", "
 lenrp = len(replacement_words)
 
 
-# list from https://github.com/MauriceButler/badwords
+# modified list from https://github.com/MauriceButler/badwords
 blacklisted_words = ["anal", "anus", "arrse", "arse", "ass", "ass-fucker", 
 	"asses", "assfucker", "assfukka", "asshole", "assholes", "asswhole", 
 	"ballbag", "balls", "ballsack", "bastard", "beastial", "beastiality", "bestial", "bestiality", 
@@ -182,10 +182,10 @@ blacklisted_words = ["anal", "anus", "arrse", "arse", "ass", "ass-fucker",
 	"mothafucking", "mothafuckings", "mothafucks", "motherfuck", "motherfucked", "motherfucker", 
 	"motherfuckers", "motherfuckin", "motherfucking", "motherfuckings", "motherfuckka", "motherfucks", "muff", 
 	"mutha", "muthafecker", "muthafuckker", "muther", "mutherfucker", "nazi",
-	"nigga", "niggah", "niggas", "niggaz", "nigger", "niggers", "nob", "nob jokey", "nobhead", "nobjocky", "nobjokey", 
+	"nigga", "niggah", "niggas", "niggaz", "nigger", "niggers", 
 	"numbnuts", "nutsack", "orgasim", "orgasims", "orgasm", "orgasms", "pawn", "pecker", "penis", "penisfucker", 
 	"phonesex", "phuck", "phuk", "phuked", "phuking", "phukked", "phukking", "phuks", "phuq", "pigfucker", "pimpis", 
-	"piss", "pissed", "pisser", "pissers", "pisses", "pissflaps", "pissin", "pissing", "pissoff", "poop", "porn", 
+	"piss", "pissed", "pisser", "pissers", "pisses", "pissflaps", "pissin", "pissing", "pissoff", "porn", 
 	"porno", "pornography", "pornos", "prick", "pricks", "pron", "pube", "pusse", "pussi", "pussies", "pussy", "pussys", 
 	"rectum", "retard", "rimjaw", "rimming", "sadist", "schlong", "screwing", "scroat", "scrote", 
 	"scrotum", "semen", "sex", "shag", "shagger", "shaggin", "shagging", "shemale",

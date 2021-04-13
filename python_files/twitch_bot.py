@@ -38,27 +38,26 @@ def main() -> None:
 
 			# process each message
 			for raw_response in seperated_responses:
-
+				
+				# respond to server pings to avoid disconnect
 				if raw_response == "PING :tmi.twitch.tv": # reply to server pings
 					s.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
 					print("PONG sent.")
 				
+				# process user messages
 				else:
-					# parse raw messages for message and user data,
-					# pass data to parsing function
+					# parse raw messages for message contents and username,
 					message = CHAT_MSG.sub("", raw_response)
 					sender_username = CHAT_MSG_SENDER.search(raw_response).group()[1:]
 					
 					if message.find('tmi.twitch.tv') == -1 and message:
 						# append message to chat log
-						time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-						sender = sender_username.ljust(25, ".")
-						with open(chat_log_path, 'a') as chat_log:
-							logstring = f"{time} - {sender}: {message}" + "\n"
-							chat_log.write(logstring)
-							print(logstring.strip()) # debug
+						log_msg(message, sender_username)
+
+						# parse info into correct format
 						cmd_info = parse_commands(message, sender_username)
 
+						# if message contained a relevant command then call the appropriate function to execute it
 						if cmd_info[0]:
 							call_interface_util.call_interface(cmd_info, message, sender_username)
 
@@ -67,7 +66,6 @@ def main() -> None:
 		# we want to ignore it and keep running
 		except BlockingIOError:
 			pass
-
 		try:
 			sleep(cfg.threads_delay)
 		except KeyboardInterrupt:
@@ -76,6 +74,18 @@ def main() -> None:
 		
 	s.close()
 	print("Twitch bot terminated.")
+
+
+def log_msg(message, sender_username) -> None:
+	"""
+	logs given message to other/.chat_log file
+	"""
+	time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+	sender = sender_username.ljust(25, ".")
+	with open(chat_log_path, 'a') as chat_log:
+		logstring = f"{time} - {sender}: {message}" + "\n"
+		chat_log.write(logstring)
+		print(logstring.strip()) # debug
 
 
 def connect(s) -> None:

@@ -17,7 +17,9 @@ interface_func_calls = {
 
 
 def call_interface(cmd_info, message, sender_username) -> None:
-    """Does some checks and then calls the apporopriate interface to handle the command"""
+    """
+    Does a few checks and then calls the appropriate interface to handle the command
+    """
     # variable will be set to False if it fails a check
     command_unlocked = True
     
