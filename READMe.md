@@ -12,6 +12,7 @@
 
 ### Other software
 - catia - https://github.com/falkTX/Cadence
+- obs-websocket https://github.com/Palakis/obs-websocket
 
 ### Pd externals
 - zexy
