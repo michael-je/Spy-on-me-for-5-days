@@ -1,3 +1,5 @@
+# This is the entry into the script. It parses twitch comments and triggers the rest of the scripts.
+
 import cfg
 import utilities
 import states
@@ -6,8 +8,15 @@ import states
 import importlib
 import socket
 import re
+import os.path
+from datetime import datetime
 from time import sleep
 from time import time
+
+# chat log relative path
+file_path = os.path.abspath(__file__)
+file_dir = os.path.abspath(os.path.join(file_path, os.path.pardir))
+chat_log_path = file_dir + cfg.chat_log_relative_path
 
 # compile regex to match twitch's message formatting
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
@@ -41,7 +50,13 @@ def main() -> None:
 					sender_username = CHAT_MSG_SENDER.search(raw_response).group()[1:]
 					
 					if message.find('tmi.twitch.tv') == -1 and message:
-						print(f"\n{sender_username}: {message}") # debug
+						# append message to chat log
+						time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+						sender = sender_username.ljust(25, ".")
+						with open(chat_log_path, 'a') as chat_log:
+							logstring = f"{time} - {sender}: {message}" + "\n"
+							chat_log.write(logstring)
+							print(logstring) # debug
 						cmd_info = parse_commands(message, sender_username)
 
 						if cmd_info[0]:
