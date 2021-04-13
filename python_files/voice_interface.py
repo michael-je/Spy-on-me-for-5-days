@@ -1,14 +1,13 @@
 import cfg
+import utilities
 
 import os.path
 import subprocess
 from random import randint
 
 # get relative path of shell script
-file_path = os.path.abspath(__file__)
-file_dir = os.path.abspath(os.path.join(file_path, os.path.pardir))
-file_parent_dir = os.path.abspath(os.path.join(file_dir, os.path.pardir))
-t2s_script_path = file_parent_dir + "/" + cfg.t2s_script_path
+t2s_script_path = utilities.get_file_path(__file__, cfg.t2s_script_path)
+
 
 def text2speech(_commands, message, sender_username) -> None:
     message = message[5:] # remove the "!say " at the beginning of message

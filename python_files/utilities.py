@@ -15,12 +15,6 @@ interface_func_calls = {
 	"text2speech": voice_interface.text2speech
 }
 
-# relative path of states file
-file_path = os.path.abspath(__file__)
-file_dir = os.path.abspath(os.path.join(file_path, os.path.pardir))
-file_parent_dir = os.path.abspath(os.path.join(file_dir, os.path.pardir))
-states_path = file_parent_dir + "/" + cfg.states_path
-
 
 def call_interface(cmd_info, message, sender_username) -> None:
     """Does some checks and then calls the apporopriate interface to handle the command"""
@@ -39,10 +33,21 @@ def call_interface(cmd_info, message, sender_username) -> None:
         interface_func_calls.get(cmd_info[1])(cmd_info, message, sender_username)
 
 
+def get_file_path(python_file_object, relative_path) -> str:
+    """
+    gives absolute path from given __file__ object and relative path
+    """
+    file_path = os.path.abspath(python_file_object)
+    file_dir = os.path.abspath(os.path.join(file_path, os.path.pardir))
+    file_parent_dir = os.path.abspath(os.path.join(file_dir, os.path.pardir))
+    return file_parent_dir + '/' + relative_path
+
+
 # ============================= STATES ====================================
 def print_states() -> None:
     with open(states_path) as states:
         print(states.read().strip())
+
 
 def check_state(state_name) -> bool:
     with open(states_path) as states:
@@ -81,3 +86,5 @@ def set_state(arg_state_name, arg_state_status) -> None:
         state_file.write(output_text)
 
     
+# relative path of states file
+states_path = get_file_path(__file__, cfg.states_path)
