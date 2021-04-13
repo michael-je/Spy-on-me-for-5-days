@@ -42,6 +42,11 @@ arduino_com_port = "/dev/ttyACM0"
 arduino_baud_rate = 9600
 
 
+# ============================= ARDUINO ====================================
+animal_soundfiles_path = "other/"
+animal_sounds_script_path = "other/play_animal_sound.sh"
+
+
 # ============================= UTILITIES ==================================
 states_path = "other/states.txt"
 
