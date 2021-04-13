@@ -16,7 +16,8 @@ from time import time
 # chat log relative path
 file_path = os.path.abspath(__file__)
 file_dir = os.path.abspath(os.path.join(file_path, os.path.pardir))
-chat_log_path = file_dir + cfg.chat_log_relative_path
+file_parent_dir = os.path.abspath(os.path.join(file_dir, os.path.pardir))
+chat_log_path = file_parent_dir + "/" + cfg.chat_log_path
 
 # compile regex to match twitch's message formatting
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
