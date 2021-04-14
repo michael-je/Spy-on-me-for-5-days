@@ -1,4 +1,4 @@
-#N canvas 1296 375 1077 731 12;
+#N canvas 1355 160 1077 489 12;
 #X obj 47 228 mixer, f 56;
 #X obj 46 38 adc~ 1 2 3 4 5 6 7 8, f 56;
 #X obj 937 48 osc-rcv2;
@@ -7,7 +7,7 @@
 #X msg 934 172 \; pd dsp 1;
 #X obj 274 164 freeverb~;
 #X msg 317 123 dry 0.3 wet 0.7 roomsize 0.8;
-#X obj 317 88 loadbang;
+#X obj 419 73 loadbang;
 #X obj 54 426 dac~ 1 2 3 4, f 55;
 #X text 72 451 SPEAKERS;
 #X text 356 452 OBS;
@@ -35,5 +35,5 @@
 #X connect 4 0 5 0;
 #X connect 6 0 0 4;
 #X connect 7 0 6 0;
-#X connect 8 0 7 0;
+#X connect 8 0 15 0;
 #X connect 15 0 6 0;

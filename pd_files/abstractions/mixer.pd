@@ -1,90 +1,90 @@
-#N canvas 1074 563 1218 772 12;
-#X obj 42 41 inlet~;
-#X obj 109 16 r s1;
-#X obj 109 267 vline~;
-#X msg 109 239 \$1 5;
-#X obj 109 66 / 127;
-#X obj 42 298 *~, f 10;
-#X obj 109 97 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
+#N canvas 1112 970 1347 408 12;
+#X obj 42 28 inlet~;
+#X obj 110 27 r s1;
+#X obj 109 254 vline~;
+#X msg 109 226 \$1 5;
+#X obj 109 53 / 127;
+#X obj 42 285 *~, f 10;
+#X obj 109 84 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
 -262144 -1 -1 0 1;
-#X obj 184 43 inlet~;
-#X obj 251 269 vline~;
-#X msg 251 241 \$1 5;
-#X obj 251 68 / 127;
-#X obj 184 300 *~, f 10;
-#X obj 251 99 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
+#X obj 184 30 inlet~;
+#X obj 251 256 vline~;
+#X msg 251 228 \$1 5;
+#X obj 251 55 / 127;
+#X obj 184 287 *~, f 10;
+#X obj 251 86 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
 -262144 -1 -1 0 1;
-#X obj 327 43 inlet~;
-#X obj 394 269 vline~;
-#X msg 394 241 \$1 5;
-#X obj 394 68 / 127;
-#X obj 327 300 *~, f 10;
-#X obj 394 99 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
--262144 -1 -1 5200 1;
-#X obj 469 45 inlet~;
-#X obj 536 271 vline~;
-#X msg 536 243 \$1 5;
-#X obj 536 70 / 127;
-#X obj 469 302 *~, f 10;
-#X obj 536 101 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
--262144 -1 -1 4300 1;
-#X obj 613 45 inlet~;
-#X obj 680 271 vline~;
-#X msg 680 243 \$1 5;
-#X obj 680 70 / 127;
-#X obj 613 302 *~, f 10;
-#X obj 680 101 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
--262144 -1 -1 4600 1;
-#X obj 755 47 inlet~;
-#X obj 822 273 vline~;
-#X msg 822 245 \$1 5;
-#X obj 822 72 / 127;
-#X obj 755 304 *~, f 10;
-#X obj 822 103 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
--262144 -1 -1 5600 1;
-#X obj 898 47 inlet~;
-#X obj 965 273 vline~;
-#X msg 965 245 \$1 5;
-#X obj 965 72 / 127;
-#X obj 898 304 *~, f 10;
-#X obj 965 103 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
--262144 -1 -1 4200 1;
-#X obj 1040 49 inlet~;
-#X obj 1107 275 vline~;
-#X msg 1107 247 \$1 5;
-#X obj 1107 74 / 127;
-#X obj 1040 306 *~, f 10;
-#X obj 1107 105 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0
-10 -262144 -1 -1 6200 1;
-#X obj 251 44 r s2;
-#X obj 394 44 r s3;
-#X obj 536 46 r s4;
-#X obj 680 46 r s5;
-#X obj 822 48 r s6;
-#X obj 965 48 r s7;
-#X obj 1107 50 r s8;
-#X obj 1108 586 vline~;
-#X msg 1108 558 \$1 5;
-#X obj 1108 416 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0
-10 -262144 -1 -1 2500 1;
-#X obj 1108 361 r m;
-#X obj 1108 385 / 127;
-#X obj 42 696 outlet~;
-#X obj 42 661 *~;
-#X obj 182 698 outlet~;
-#X obj 182 663 *~;
-#X obj 326 696 outlet~;
-#X obj 326 661 *~;
-#X obj 466 698 outlet~;
-#X obj 466 663 *~;
-#X obj 612 702 outlet~;
-#X obj 612 667 *~;
-#X obj 752 704 outlet~;
-#X obj 752 669 *~;
-#X obj 896 702 outlet~;
-#X obj 896 667 *~;
-#X obj 1036 704 outlet~;
-#X obj 1036 669 *~;
+#X obj 327 30 inlet~;
+#X obj 394 256 vline~;
+#X msg 394 228 \$1 5;
+#X obj 394 55 / 127;
+#X obj 327 287 *~, f 10;
+#X obj 394 86 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
+-262144 -1 -1 0 1;
+#X obj 469 32 inlet~;
+#X obj 536 258 vline~;
+#X msg 536 230 \$1 5;
+#X obj 536 57 / 127;
+#X obj 469 289 *~, f 10;
+#X obj 536 88 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
+-262144 -1 -1 0 1;
+#X obj 613 32 inlet~;
+#X obj 680 258 vline~;
+#X msg 680 230 \$1 5;
+#X obj 680 57 / 127;
+#X obj 613 289 *~, f 10;
+#X obj 680 88 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
+-262144 -1 -1 10200 1;
+#X obj 755 34 inlet~;
+#X obj 822 260 vline~;
+#X msg 822 232 \$1 5;
+#X obj 822 59 / 127;
+#X obj 755 291 *~, f 10;
+#X obj 822 90 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
+-262144 -1 -1 7200 1;
+#X obj 898 34 inlet~;
+#X obj 965 260 vline~;
+#X msg 965 232 \$1 5;
+#X obj 965 59 / 127;
+#X obj 898 291 *~, f 10;
+#X obj 965 90 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
+-262144 -1 -1 0 1;
+#X obj 1040 36 inlet~;
+#X obj 1107 262 vline~;
+#X msg 1107 234 \$1 5;
+#X obj 1107 61 / 127;
+#X obj 1040 293 *~, f 10;
+#X obj 1107 92 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0 10
+-262144 -1 -1 0 1;
+#X obj 251 31 r s2;
+#X obj 394 31 r s3;
+#X obj 536 33 r s4;
+#X obj 680 33 r s5;
+#X obj 822 35 r s6;
+#X obj 965 35 r s7;
+#X obj 1107 37 r s8;
+#X obj 1255 302 vline~;
+#X msg 1255 274 \$1 5;
+#X obj 1255 132 vsl 15 128 0 1 0 0 empty mixer_slider empty 0 -9 0
+10 -262144 -1 -1 5400 1;
+#X obj 1255 77 r m;
+#X obj 1255 101 / 127;
+#X obj 43 349 outlet~;
+#X obj 43 314 *~;
+#X obj 183 351 outlet~;
+#X obj 183 316 *~;
+#X obj 327 349 outlet~;
+#X obj 327 314 *~;
+#X obj 467 351 outlet~;
+#X obj 467 316 *~;
+#X obj 613 355 outlet~;
+#X obj 613 320 *~;
+#X obj 753 357 outlet~;
+#X obj 753 322 *~;
+#X obj 897 355 outlet~;
+#X obj 897 320 *~;
+#X obj 1037 357 outlet~;
+#X obj 1037 322 *~;
 #X connect 0 0 5 0;
 #X connect 1 0 4 0;
 #X connect 2 0 5 1;
