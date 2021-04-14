@@ -141,6 +141,15 @@ command_matches = {
 		None,
 		None,
 		None
+	],
+	"talk_to_michael":[
+		"talk_to_michael",
+		"talk_to_michael",
+		["!michael"],
+		None,
+		None,
+		None,
+		None
 	]
 }
 
