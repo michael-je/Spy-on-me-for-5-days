@@ -3,6 +3,7 @@ import obs_interface
 import rpi_interface
 import voice_interface
 import animals
+import talk_to_michael
 
 from datetime import datetime
 
@@ -12,7 +13,8 @@ interface_func_calls = {
 	"pd":pd_interface.main,
 	"rpi":rpi_interface.main,
 	"text2speech":voice_interface.text2speech,
-    "animal_sounds":animals.play_animal_sound
+    "animal_sounds":animals.play_animal_sound,
+    "talk_to_michael":talk_to_michael.process_msg
 }
 
 

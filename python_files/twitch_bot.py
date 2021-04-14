@@ -112,8 +112,8 @@ def log_msg(message, sender_username) -> None:
 	"""
 	time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 	sender = sender_username.ljust(25, ".")
+	logstring = f"{time} - {sender}: {message}" + "\n"
 	with open(chat_log_path, 'a') as chat_log:
-		logstring = f"{time} - {sender}: {message}" + "\n"
 		chat_log.write(logstring)
 		print(logstring.strip()) # debug
 

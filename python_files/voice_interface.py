@@ -6,13 +6,14 @@ import subprocess
 from random import randint
 from time import sleep
 import threading
+import re
 
 # get relative path of shell script
 t2s_script_path = utilities.get_file_path(__file__, cfg.t2s_script_path)
 
 
-def text2speech(_commands, message, sender_username) -> None:
-    message = message[5:] # remove the "!say " at the beginning of message
+def text2speech(_command_info, message, sender_username) -> None:
+    message = re.sub(r"!say", "", message) # remove !say command in the message
     message = filter_text(message)
     text = f"{sender_username} says: {message}"
     
