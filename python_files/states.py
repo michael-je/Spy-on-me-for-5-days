@@ -1,3 +1,3 @@
 # stores global variable and flag states
 
-terminate_flag = False
+terminate_flag = 0

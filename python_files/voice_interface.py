@@ -25,12 +25,14 @@ def speak(text) -> None:
     calls the text2speech shell script
     """
     # wait for mutex to unlock
-    while utilities.get_state("mpv_mutex"):
+    while utilities.mpv_mutex:
         sleep(0.5) 
-    # set mutex
-    utilities.set_state("mpv_mutex", 1)
+    # lock mutex
+    utilities.mpv_mutex = 1
     # start the mpv script
     subprocess.call([t2s_script_path, text])
+    # unlcok mutex
+    utilities.mpv_mutex = 0
 
 
 def filter_text(text) -> str:

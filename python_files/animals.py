@@ -30,9 +30,11 @@ def play_random_animal() -> None:
 
 def play_sound_file(sound_file) -> None:
     # wait for mutex to unlock
-    while utilities.get_state("mpv_mutex"):
+    while utilities.mpv_mutex:
         sleep(0.5)
-    # set mutex
-    utilities.set_state("mpv_mutex", 1)
+    # lock mutex
+    utilities.mpv_mutex = 1
     # start the mpv script
     subprocess.call([animal_sounds_script_path, sound_file])
+    # unlock mutex
+    utilities.mpv_mutex = 0

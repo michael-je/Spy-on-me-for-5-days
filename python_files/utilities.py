@@ -3,6 +3,9 @@ import cfg
 from datetime import datetime
 import os.path as path
 
+# used by animals and voice_interface 
+mpv_mutex = 0
+
 
 def get_file_path(python_file_object, relative_path) -> str:
     """
