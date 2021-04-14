@@ -5,26 +5,28 @@ import os.path
 import subprocess
 from random import randint
 from time import sleep
+import threading
 
 # get relative path of shell script
 t2s_script_path = utilities.get_file_path(__file__, cfg.t2s_script_path)
 
 
 def text2speech(_commands, message, sender_username) -> None:
-    # wait for mutex to unlock
-    while utilities.get_state("mpv_mutex"):
-        sleep(0.5)
-    
     message = message[5:] # remove the "!say " at the beginning of message
+    message = filter_text(message)
     text = f"{sender_username} says: {message}"
-    speak(text)
+    
+    speech_thread = threading.Thread(target=speak, args=(text,))
+    speech_thread.start()
 
 
 def speak(text) -> None:
     """
     calls the text2speech shell script
     """
-    text = filter_text(text)
+    # wait for mutex to unlock
+    while utilities.get_state("mpv_mutex"):
+        sleep(0.5) 
     # set mutex
     utilities.set_state("mpv_mutex", 1)
     # start the mpv script

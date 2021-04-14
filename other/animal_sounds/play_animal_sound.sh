@@ -8,7 +8,7 @@ projectDir=$(dirname $(dirname curDir))
 $curDir/expect_script.exp $curDir $1 && $projectDir/other/unlockMpvMutex.sh &
 
 # give mpv some time to initialize
-sleep 0.1
+sleep 0.3
 
 # reconnect mpv to pure data
 # only use the left channel

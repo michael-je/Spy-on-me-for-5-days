@@ -25,6 +25,7 @@ CHAT_MSG_SENDER = re.compile(r"^:\w+")
 
 def main() -> None:
 	utilities.set_state("terminate_flag", 0)
+	utilities.set_state("mpv_mutex", 0)
 	
 	s = socket.socket()
 	connect(s)
