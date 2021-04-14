@@ -19,7 +19,9 @@ except AttributeError:
 	PASS = "PASS"
 	CHAN = "CHAN"
 
-enable_time = False # whether or not to check for when commands become available
+enable_time = False # whether or not to block commands based on time blocking param (index 6 of commands)
+twitch_chat_spam_filter_seconds = 2 # block messages from users if sent within this long of each other
+twitch_bot_loop_delay = 1 / 1000 # delay (in seconds) between each twitch_bot loop
 
 chat_log_path = "other/.chat_log"
 
@@ -51,7 +53,6 @@ states_path = "other/states.txt"
 
 
 # ============================= MISC =======================================
-threads_delay = 1 								# delay time inserted into thread loops in seconds
 twitch_chat_spam_filter_seconds = 2 			# how long the spam filter should ignore messages after last received
 obs_recording_time_split = 60 * 60 				# how long to wait between recording splits in OBS in seconds
 

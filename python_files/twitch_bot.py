@@ -12,7 +12,6 @@ import re
 import os.path
 from datetime import datetime
 from time import sleep
-from time import time
 
 # chat log relative path
 chat_log_path = utilities.get_file_path(__file__, cfg.chat_log_path)
@@ -55,26 +54,56 @@ def main() -> None:
 						# append message to chat log
 						log_msg(message, sender_username)
 
-						# parse info into correct format
-						cmd_info = parse_commands(message, sender_username)
+						# only run if message is not filtered out
+						if not filter_message(sender_username):
 
-						# if message contained a relevant command then call the appropriate function to execute it
-						if cmd_info[0]:
-							call_interface_util.call_interface(cmd_info, message, sender_username)
+							# parse info into correct format
+							cmd_info = parse_commands(message, sender_username)
 
+							# if message contained a relevant command then call the appropriate function to execute it
+							if cmd_info[0]:
+								call_interface_util.call_interface(cmd_info, message, sender_username)
 
 		# this exception is raised if there is no data in the recv buffer,
 		# we want to ignore it and keep running
 		except BlockingIOError:
 			pass
 		try:
-			sleep(cfg.threads_delay)
+			sleep(cfg.twitch_bot_loop_delay)
 		except KeyboardInterrupt:
 			utilities.set_state("terminate_flag", 1)
 			break
 		
 	s.close()
 	print("Twitch bot terminated.")
+
+
+
+chatter_times = {}
+def filter_message(chatter) -> bool:
+	"""
+	Filters out messages, currently only spam. Spam timer is set in .cfg
+	returns True if message should be ignored, false otherwise
+	"""
+	output = False
+
+	now = datetime.now()
+	chatter_last_message_time = chatter_times.get(chatter)
+
+	# filter out spammy messages
+	# if chatter is already in chatter_times
+	if chatter_last_message_time is not None:
+		# diff between current message and previous message
+		delta_datetime = now - chatter_last_message_time
+		time_delta = delta_datetime.total_seconds()
+		# if diff is less than time set in .cfg then filter it out
+		if time_delta < cfg.twitch_chat_spam_filter_seconds:
+			print(f"Spam filter: Message from {chatter} blocked.") #debug
+			output = True
+	
+	# set chatter time to current time
+	chatter_times[chatter] = now
+	return output
 
 
 def log_msg(message, sender_username) -> None:
@@ -111,7 +140,7 @@ def connect(s) -> None:
 					return
 		except BlockingIOError:
 			pass
-		sleep(cfg.threads_delay)
+		sleep(cfg.twitch_bot_loop_delay)
 
 
 def parse_commands(message, sender_username) -> list:
