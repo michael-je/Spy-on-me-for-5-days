@@ -55,6 +55,7 @@ states_path = "other/states.txt"
 # ============================= MISC =======================================
 twitch_chat_spam_filter_seconds = 2 			# how long the spam filter should ignore messages after last received
 obs_recording_time_split = 60 * 60 				# how long to wait between recording splits in OBS in seconds
+hide_msg_from_michael_cmd_name = "!hide"		# command to hide message from outputting to michael's terminal
 
 
 # ============================= COMMANDS ===================================
@@ -137,15 +138,6 @@ command_matches = {
 		"random_animal",
 		"animal_sounds",
 		['!animal'],
-		None,
-		None,
-		None,
-		None
-	],
-	"talk_to_michael":[
-		"talk_to_michael",
-		"talk_to_michael",
-		["!michael"],
 		None,
 		None,
 		None,

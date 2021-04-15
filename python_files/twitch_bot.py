@@ -4,6 +4,7 @@ import cfg
 import utilities
 import states
 import call_interface_util
+import talk_to_michael
 
 
 import importlib
@@ -53,6 +54,8 @@ def main() -> None:
 					if message.find('tmi.twitch.tv') == -1 and message:
 						# append message to chat log
 						log_msg(message, sender_username)
+						# send message to output terminal handled by talk_to_michael.py
+						talk_to_michael.process_msg(message, sender_username)
 
 						# only run if message is not filtered out
 						if not filter_message(sender_username):

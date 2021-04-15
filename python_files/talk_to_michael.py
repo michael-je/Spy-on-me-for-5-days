@@ -1,5 +1,6 @@
 import cfg
 import utilities
+import re
 
 from time import sleep
 import threading
@@ -8,14 +9,16 @@ from datetime import datetime
 path_to_text4michael = utilities.get_file_path(__file__, "other/text4michael.txt")
 
 
-def process_msg(_cmd_info, message, sender_username) -> None:
+def process_msg(message, sender_username) -> None:
 	"""
-	Entry point for script to receive commands. Launches threads which append
-	text to other/text4michael
+	Processes every message received. Formats and sends calls for them to be output to the terminal
+	Messages with the hide command (cfg.hide_msg_from_michael_cmd_name) will not be output to the terminal
 	"""
-	write_to_text4michael_thread = threading.Thread(
-		target=write_to_text4michael, args=(message, sender_username))
-	write_to_text4michael_thread.start()
+	if not re.search(cfg.hide_msg_from_michael_cmd_name, message):
+		write_to_text4michael_thread = threading.Thread(
+											target=write_to_text4michael, 
+											args=(message, sender_username))
+		write_to_text4michael_thread.start()
 
 
 def write_to_text4michael(message, sender_username) -> None:
