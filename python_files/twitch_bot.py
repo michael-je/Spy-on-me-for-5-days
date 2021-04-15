@@ -143,6 +143,8 @@ def connect(s) -> None:
 					return
 		except BlockingIOError:
 			pass
+		except ConnectionResetError:
+			pass
 		sleep(cfg.twitch_bot_loop_delay)
 
 
