@@ -54,7 +54,7 @@ states_path = "other/states.txt"
 
 # ============================= MISC =======================================
 twitch_chat_spam_filter_seconds = 2 			# how long the spam filter should ignore messages after last received
-obs_recording_time_split = 2 * 60 * 60 			# how long to wait between recording splits in OBS in seconds
+obs_recording_time_split = 60 * 60 				# how long to wait between recording splits in OBS in seconds
 hide_msg_from_michael_cmd_name = "!hide"		# command to hide message from outputting to michael's terminal
 
 
@@ -83,7 +83,7 @@ command_matches = {
 	"desktop":[
 		"desktop",
 		"obs",
-		["desktop", "screen","ass"], 
+		["!desktop", "!screen"], 
 		None,
 		None,
 		None,
@@ -92,7 +92,7 @@ command_matches = {
 	"facecam":[
 		"facecam",
 		"obs",
-		["front", "face", "facecam"],
+		["!face", "!facecam"],
 		None,
 		None,
 		None,
@@ -101,7 +101,7 @@ command_matches = {
 	"roomcam":[
 		"roomcam",
 		"obs",
-		["room"],
+		["!room", "!roomcam"],
 		None,
 		None,
 		None,
@@ -116,22 +116,22 @@ command_matches = {
 		["on", "off"],
 		None,
 	],
-	"series":[
-		"series",
-		"rpi",
-		["series"],
+	"goodmorning":[
+		"goodmorning",
+		"aggregate_commands",
+		["!goodmorning"],
 		None,
 		None,
-		["on", "off", "brighter", "dimmer"],
 		None,
+		None
 	],
-	"lamp":[
-		"lamp",
-		"rpi",
-		["lamp"],
+	"goodnight":[
+		"goodnight",
+		"aggregate_commands",
+		["!goodnight"],
 		None,
 		None,
-		["on", "off"],
+		None,
 		None
 	],
 	"random_animal":[
