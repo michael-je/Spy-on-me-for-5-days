@@ -18,6 +18,8 @@ def format_msg_for_logging(message, sender_username) -> str:
 mpv_mutex = 0
 # used by talk_to_michael
 talk_to_michael_mutex = 0
+# used by term_utils and twitch_bot
+twitch_commands_mutex = 0
 
 
 # ============================= PATH ======================================

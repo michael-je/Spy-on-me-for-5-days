@@ -58,15 +58,9 @@ midiin.set_callback(MidiInputHandler(port_name))
 
 print("Connected to", port_name, "\n")
 
-# check the terminate flag every second
-terminate = False
 cnt = 0
 try:
-	while not terminate:
-		cnt += 1
-		if cnt == 100:
-			cnt = 0
-			terminate = utilities.get_state("terminate_flag")
+	while True:
 		sleep(0.01)
 except KeyboardInterrupt:
 	pass

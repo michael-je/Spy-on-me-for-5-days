@@ -8,7 +8,7 @@ from obswsrc.requests import ResponseStatus, SetCurrentSceneRequest
 loop = asyncio.get_event_loop()
 
 # store the current scene here, this is used when blurring/unblurring
-current_scene = 'facecam'
+current_scene = ''
 
 
 def set_blur(state) -> None:
@@ -65,3 +65,6 @@ def main(*args) -> None:
 
 def close_loop() -> None:
 	loop.close()
+
+
+set_scene('facecam')
