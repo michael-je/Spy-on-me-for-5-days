@@ -39,7 +39,7 @@ rpi_ip = "192.168.1.110"
 
 # ============================= ARDUINO ====================================
 # arduino
-arduino_com_port = "/dev/ttyACM0"
+arduino_com_port = "/dev/ttyACM1"
 arduino_baud_rate = 9600
 
 
