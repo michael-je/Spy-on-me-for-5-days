@@ -16,6 +16,9 @@ from time import sleep
 # chat log relative path
 chat_log_path = utilities.get_file_path(__file__, cfg.chat_log_path)
 
+# twitch_commands relative path
+path_to_twitch_commands = utilities.get_file_path(__file__, "other/twitch_commands.txt")
+
 
 # compile regex to match twitch's message formatting
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
@@ -32,6 +35,9 @@ def main() -> None:
 
 	while True:
 		try:
+			# first check and and process any util commands
+			process_util_commands(s)
+			
 			# separate individual messages
 			response_buffer = s.recv(1024).decode("utf-8")
 			seperated_responses = [x for x in response_buffer.split('\r\n') if x]
@@ -199,6 +205,41 @@ def parse_commands(message, sender_username) -> list:
 		cmd_info[6] = cmd[6]
 
 	return cmd_info
+
+
+def process_util_commands(s):
+	"""
+	Reads from other/twitch_commands.txt and sends appropriate command
+	to twitch via the socket
+	"""
+	if not utilities.twitch_commands_mutex:
+		utilities.twitch_commands_mutex = 1
+
+		with open(path_to_twitch_commands, 'r+') as twitch_commands_file:
+			text = twitch_commands_file.read()
+			twitch_commands_file.seek(0)
+			twitch_commands_file.truncate()
+		
+		if text:
+			commands = text.split("\n")
+			for command in commands:
+				words = command.split()
+				if words[0] == 'ban':
+					ban(s, words[1])
+				if words[0] == 'chat':
+					chat(s, ' '.join(words[1:]))
+			print(f"said {text}")
+		
+		# unlock mutex
+		utilities.twitch_commands_mutex = 0
+
+
+def chat(s, message):
+	s.send(f"PRIVMSG #{cfg.CHAN} :{message}\r\n".encode('utf-8'))
+
+
+def ban(s, username):
+	chat(s, f".ban {username}")
 
 
 if __name__ == "__main__":
