@@ -33,7 +33,7 @@ async def start_stop_recording():
 				if not response.status == ResponseStatus.OK:
 					print("OBS recording error:", response.error)
 
-				sleep(0.3)
+				sleep(0.5)
 
 				# Start recording
 				response = await obsws.require(StartRecordingRequest())
