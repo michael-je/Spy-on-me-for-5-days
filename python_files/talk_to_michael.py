@@ -49,31 +49,36 @@ def print_to_term() -> None:
 	Reads from other/text4michael.txt and prints contents to terminal
 	sleepts for one second every loop
 	"""
-	while not utilities.get_state("terminate_flag"):
-		text = ""
-		# wait for mutex to unlock
-		while utilities.talk_to_michael_mutex:
-			sleep(0.1) 
-		# lock mutex
-		utilities.talk_to_michael_mutex = 1
-		# start the mpv script
+	try:
+		while True:
+			text = ""
+			# wait for mutex to unlock
+			while utilities.talk_to_michael_mutex:
+				sleep(0.1) 
+			# lock mutex
+			utilities.talk_to_michael_mutex = 1
+			# start the mpv script
 
-		with open(path_to_text4michael, 'r+') as file4michael:
-			text = file4michael.read()
-			file4michael.seek(0)
-			file4michael.truncate()
-		
-		# only print if there was a message
-		if text:
-			print(text, end="")
+			with open(path_to_text4michael, 'r+') as file4michael:
+				text = file4michael.read()
+				file4michael.seek(0)
+				file4michael.truncate()
+			
+			# only print if there was a message
+			if text:
+				print(text, end="")
 
-		# unlock mutex
-		utilities.talk_to_michael_mutex = 0
+			# unlock mutex
+			utilities.talk_to_michael_mutex = 0
 
-		sleep(1)
+			sleep(1)
+	except KeyboardInterrupt:
+		print("Talk to michael: Closing")
+		return
 
 
 
 
 if __name__ == "__main__":
+	print("Talk to michael: Starting")
 	print_to_term()

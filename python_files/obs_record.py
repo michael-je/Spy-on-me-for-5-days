@@ -21,12 +21,10 @@ async def start_stop_recording():
 			else:
 				print("OBS recording error:", response.error)
 
-		terminate = False
-		while not terminate:
+		while True:
 			async with OBSWS('localhost', 4444, secrets.obs_wss_pass) as obsws:
 							
 				sleep(cfg.obs_recording_time_split)
-				terminate = utilities.get_state("terminate_flag")
 
 				# Stop recording
 				response = await obsws.require(StopRecordingRequest())
