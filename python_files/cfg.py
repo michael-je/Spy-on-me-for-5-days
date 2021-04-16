@@ -1,4 +1,5 @@
 import secrets
+import extra_commands
 
 from datetime import datetime
 
@@ -61,7 +62,7 @@ hide_msg_from_michael_cmd_name = "!hide"		# command to hide message from outputt
 # ============================= COMMANDS ===================================
 # refer to the example for correct protocol
 # use the keyword None if no parameters are needed at an index
-command_matches = {
+"""
 	"command name":[
 		"command name", 					# 0 command name
 		"obs", 								# 1 which program interface to target 
@@ -71,6 +72,8 @@ command_matches = {
 		["extra argument"],					# 5 if match, then also search for this
 		datetime(2021, 1, 1, 12, 0, 0)		# 6 time when command becomes available
 	],
+"""
+command_matches = {
 	"text2speech":[
 		"text2speech",
 		"text2speech",
@@ -145,6 +148,7 @@ command_matches = {
 	]
 }
 
+command_matches.update(extra_commands.extra_commands)
 
 # ============================= TEXT2SPEECH ================================
 t2s_script_path = "text2speech/text2speech.sh"

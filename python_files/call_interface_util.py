@@ -6,6 +6,7 @@ import voice_interface
 import animals
 import talk_to_michael
 import aggregate_commands
+import extra_commands_handler
 
 from datetime import datetime
 
@@ -16,7 +17,8 @@ interface_func_calls = {
 	"rpi":rpi_interface.main,
 	"text2speech":voice_interface.text2speech,
     "animal_sounds":animals.play_animal_sound,
-    "aggregate_commands":aggregate_commands.call_interfaces
+    "aggregate_commands":aggregate_commands.call_interfaces,
+    "extra_commands":extra_commands_handler.main
 }
 
 
