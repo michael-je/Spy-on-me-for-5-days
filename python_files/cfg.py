@@ -107,13 +107,13 @@ command_matches = {
 		None,
 		None
 	],
-	"dmx":[
-		"dmx",
+	"lights":[
+		"lights",
 		"pd",
 		["light", "lights", "disco"],
 		None,
 		None,
-		["on", "off"],
+		["on", "off", "crazy", "music"],
 		None,
 	],
 	"goodmorning":[
