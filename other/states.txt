@@ -1,2 +1,3 @@
 mpv_mutex 0
-terminate_flag 1
+terminate_flag 0
+blur 0
