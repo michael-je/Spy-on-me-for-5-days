@@ -2,7 +2,6 @@
 
 import cfg
 import utilities
-import states
 import call_interface_util
 import talk_to_michael
 
@@ -31,7 +30,7 @@ def main() -> None:
 	connect(s)
 	s.setblocking(False)
 
-	while not states.terminate_flag:
+	while True:
 		try:
 			# separate individual messages
 			response_buffer = s.recv(1024).decode("utf-8")
@@ -129,7 +128,7 @@ def connect(s) -> None:
 	s.send("JOIN #{}\r\n".format(cfg.CHAN).encode('utf-8'))
 
 	# loop until we are successfully connected
-	while not states.terminate_flag:
+	while True:
 		try:
 			response_buffer = s.recv(1024).decode('utf-8')
 			seperated_responses = [x for x in response_buffer.split('\r\n') if x]
