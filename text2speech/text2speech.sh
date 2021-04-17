@@ -14,7 +14,7 @@ sleep 0.3
 
 # reconnect mpv to pure data
 jack_disconnect mpv:out_0 system:playback_1
-jack_connect mpv:out_0 pure_data:input4
+jack_connect mpv:out_0 pure_data:input3
 
 # wait for child process
 wait

@@ -13,7 +13,7 @@ sleep 0.3
 # only use the left channel
 jack_disconnect mpv:out_0 system:playback_1
 jack_disconnect mpv:out_1 system:playback_2
-jack_connect mpv:out_0 pure_data:input5
+jack_connect mpv:out_0 pure_data:input4
 # jack_connect mpv:out_1 pure_data:input7
 
 # wait for child process
