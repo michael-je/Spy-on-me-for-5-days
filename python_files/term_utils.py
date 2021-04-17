@@ -6,6 +6,7 @@ from time import sleep
 # twitch_commands relative path
 path_to_twitch_commands = utilities.get_file_path(__file__, "other/twitch_commands.txt")
 
+print('Launching term_utils')
 
 def set_blur(state):
     obs_interface.set_blur(state)
@@ -35,3 +36,10 @@ def chat(message, prefix='chat'):
 
 def ban(username):
     chat(username, prefix='ban')
+
+
+help = ', '.join([
+	'set_blur/blur(state)',
+	'chat(msg)',
+	'ban(user)'
+])
