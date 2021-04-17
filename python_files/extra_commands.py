@@ -10,6 +10,8 @@
 	],
 """
 
+# make sure to set the interface to "extra_commands!"
+
 extra_commands = {
 
 }

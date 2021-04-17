@@ -48,7 +48,7 @@ def main() -> None:
 				# respond to server pings to avoid disconnect
 				if raw_response == "PING :tmi.twitch.tv": # reply to server pings
 					s.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
-					print("PONG sent.")
+					print("Twitch bot: PONG sent.")
 				
 				# process user messages
 				else:
@@ -123,7 +123,7 @@ def log_msg(message, sender_username) -> None:
 	logstring = f"{time} - {sender}: {message}" + "\n"
 	with open(chat_log_path, 'a') as chat_log:
 		chat_log.write(logstring)
-		print(logstring.strip()) # debug
+		#print(logstring.strip()) # debug
 
 
 def connect(s) -> None:
@@ -193,7 +193,7 @@ def parse_commands(message, sender_username) -> list:
 		for word in word_list:
 
 			if cmd[4] and word.isnumeric():	# check numeric range
-				if cmd[4][0] < word < cmd[4][1]:
+				if cmd[4][0] <= int(word) <= cmd[4][1]:
 					cmd_info[4] = word
 
 			if cmd[5] and word in cmd[5]:	# check for arguments
@@ -204,6 +204,7 @@ def parse_commands(message, sender_username) -> list:
 
 		cmd_info[6] = cmd[6]
 
+	#print(cmd_info)
 	return cmd_info
 
 

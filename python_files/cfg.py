@@ -30,12 +30,13 @@ chat_log_path = "other/.chat_log"
 # ============================= OSC ========================================
 # ports for osc connections
 qlc_osc_port = 7700 # listed here but actually configured in pd
-pd_osc_port = 7699
+pd_osc_port = 6031
 rpi_osc_port = 7691
 
 # local ip addresses
 desktop_ip = "192.168.1.225"
 rpi_ip = "192.168.1.110"
+local_IP = "127.0.0.1"
 
 
 # ============================= ARDUINO ====================================
@@ -55,13 +56,14 @@ states_path = "other/states.txt"
 
 # ============================= MISC =======================================
 twitch_chat_spam_filter_seconds = 2 			# how long the spam filter should ignore messages after last received
-obs_recording_time_split = 60 * 60 				# how long to wait between recording splits in OBS in seconds
+obs_recording_time_split = 2 * 60 * 60 			# how long to wait between recording splits in OBS in seconds
 hide_msg_from_michael_cmd_name = "!hide"		# command to hide message from outputting to michael's terminal
 
 
 # ============================= COMMANDS ===================================
 # refer to the example for correct protocol
 # use the keyword None if no parameters are needed at an index
+# extra commands can be added in the extra_commands.py file!
 """
 	"command name":[
 		"command name", 					# 0 command name
@@ -110,15 +112,6 @@ command_matches = {
 		None,
 		None
 	],
-	"lights":[
-		"lights",
-		"pd",
-		["light", "lights", "disco"],
-		None,
-		None,
-		["on", "off", "crazy", "music"],
-		None,
-	],
 	"goodmorning":[
 		"goodmorning",
 		"aggregate_commands",
@@ -145,19 +138,30 @@ command_matches = {
 		None,
 		None,
 		None
-	]
+	],
+	"lights":[
+		"lights",
+		"pd",
+		["light", "lights", "disco"],
+		None,
+		None,
+		["on", "off", "crazy", "music"],
+		None,
+	],
 }
-
 command_matches.update(extra_commands.extra_commands)
 
 # ============================= TEXT2SPEECH ================================
 t2s_script_path = "text2speech/text2speech.sh"
-replacement_words = ["flower,", "kitty,", "sunshine,", "happy,", "wonderful,", "sexy", "handsome", "dreamy"]
+replacement_words = [
+	"flower,", "kitty,", "sunshine,", "happy,", "wonderful,", "sexy", "handsome", "dreamy"
+]
 lenrp = len(replacement_words)
 
 
 # modified list from https://github.com/MauriceButler/badwords
-blacklisted_words = ["anal", "anus", "arrse", "arse", "ass", "ass-fucker", 
+blacklisted_words = [
+	"anal", "anus", "arrse", "arse", "ass", "ass-fucker", 
 	"asses", "assfucker", "assfukka", "asshole", "assholes", "asswhole", 
 	"ballbag", "balls", "ballsack", "bastard", "beastial", "beastiality", "bestial", "bestiality", 
 	"biatch", "bitch", "bitcher", "bitchers", "bitches", "bitchin", "bitching", "blowjob", 
@@ -200,4 +204,5 @@ blacklisted_words = ["anal", "anus", "arrse", "arse", "ass", "ass-fucker",
 	"snatch", "spac", "spunk", "teets", "teez", "testical", "testicle", 
 	"tit", "titfuck", "tits", "titt", "tittiefucker", "titties", "tittyfuck", "tittywank", "titwank", "tosser", 
 	"turd", "twat", "twathead", "twatty", "twunt", "twunter", "vagina", "viagra", "vulva", 
-	"wang", "wank", "wanker", "wanky", "whoar", "whore", "willies", "willy"]
+	"wang", "wank", "wanker", "wanky", "whoar", "whore", "willies", "willy"
+]
