@@ -15,3 +15,81 @@
 extra_commands = {
 
 }
+
+extra_blacklisted_words = [
+
+]
+
+extra_replacement_words = [
+	
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	# "lights":[
+	# 	"lights",
+	# 	"pd",
+	# 	["light", "lights", "disco"],
+	# 	None,
+	# 	None,
+	# 	["on", "off", "crazy", "music"],
+	# 	None,
+	# ],
