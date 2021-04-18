@@ -4,6 +4,7 @@ import cfg
 import utilities
 import call_interface_util
 import talk_to_michael
+import extra_message_parser
 
 
 import importlib
@@ -34,6 +35,7 @@ def main() -> None:
 	s.setblocking(False)
 
 	while True:
+		importlib.reload(extra_message_parser)
 		try:
 			# first check and and process any util commands
 			process_util_commands(s)
@@ -44,6 +46,7 @@ def main() -> None:
 
 			# process each message
 			for raw_response in seperated_responses:
+				extra_message_parser.main(raw_response)
 				
 				# respond to server pings to avoid disconnect
 				if raw_response == "PING :tmi.twitch.tv": # reply to server pings

@@ -24,4 +24,4 @@ def main(*args):
 		client.send_message("/rpi", arguments.get(
 			cmd_info[0]).get(
 			cmd_info[5]))
-		print("rpi send:", cmd_info)
+		#print("rpi send:", cmd_info)

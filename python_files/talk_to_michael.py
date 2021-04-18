@@ -12,9 +12,9 @@ path_to_text4michael = utilities.get_file_path(__file__, "other/text4michael.txt
 def process_msg(message, sender_username) -> None:
 	"""
 	Processes every message received. Formats and sends calls for them to be output to the terminal
-	Messages with the hide command (cfg.hide_msg_from_michael_cmd_name) will not be output to the terminal
+	Messages with the hide command !hide will not be output to the terminal
 	"""
-	if not re.search(cfg.hide_msg_from_michael_cmd_name, message):
+	if not re.search("!hide", message):
 		write_to_text4michael_thread = threading.Thread(
 											target=write_to_text4michael, 
 											args=(message, sender_username))
