@@ -1,4 +1,3 @@
-import call_interface_util
 import rpi_interface
 
 # interface functions to be called once a command match is found

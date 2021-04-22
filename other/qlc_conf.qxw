@@ -59,7 +59,7 @@
     </Appearance>
     <Input Universe="0" Channel="2406"/>
     <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-    <Level LowLimit="0" HighLimit="255" Value="0">
+    <Level LowLimit="0" HighLimit="255" Value="178">
      <Channel Fixture="0">0</Channel>
     </Level>
     <Playback>
@@ -77,7 +77,7 @@
     </Appearance>
     <Input Universe="0" Channel="42742"/>
     <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="false">Level</SliderMode>
-    <Level LowLimit="0" HighLimit="255" Value="0">
+    <Level LowLimit="0" HighLimit="255" Value="1">
      <Channel Fixture="0">1</Channel>
     </Level>
     <Playback>

@@ -20,7 +20,7 @@ except AttributeError:
 	PASS = "PASS"
 	CHAN = "CHAN"
 
-enable_time = False # whether or not to block commands based on time blocking param (index 6 of commands)
+enable_time = True # whether or not to block commands based on time blocking param (index 6 of commands)
 twitch_chat_spam_filter_seconds = 2 # block messages from users if sent within this long of each other
 twitch_bot_loop_delay = 1 / 1000 # delay (in seconds) between each twitch_bot loop
 
@@ -55,7 +55,7 @@ states_path = "other/states.txt"
 
 
 # ============================= MISC =======================================
-twitch_chat_spam_filter_seconds = 2 			# how long the spam filter should ignore messages after last received
+twitch_chat_spam_filter_seconds = 1 			# how long the spam filter should ignore messages after last received
 obs_recording_time_split = 2 * 60 * 60 			# how long to wait between recording splits in OBS in seconds
 
 
@@ -185,12 +185,12 @@ command_matches = {
 		None,
 		None,
 		None,
-		datetime(2020, 1, 1, 12, 0, 0)
+		datetime(2021, 4, 21, 14, 0, 0)
 	],
 	"desktop":[
 		"desktop",
 		"obs",
-		["!desktop", "!screen"], 
+		["!screen"], 
 		None,
 		None,
 		None,
@@ -199,7 +199,7 @@ command_matches = {
 	"facecam":[
 		"facecam",
 		"obs",
-		["!face", "!facecam"],
+		["!face"],
 		None,
 		None,
 		None,
@@ -208,11 +208,11 @@ command_matches = {
 	"roomcam":[
 		"roomcam",
 		"obs",
-		["!room", "!roomcam"],
+		["!room"],
 		None,
 		None,
 		None,
-		None
+		datetime(2021, 4, 19, 14, 0, 0)
 	],
 	"goodmorning":[
 		"goodmorning",
@@ -221,7 +221,7 @@ command_matches = {
 		None,
 		None,
 		None,
-		None
+		datetime(2021, 4, 19, 14, 0, 0)
 	],
 	"goodnight":[
 		"goodnight",
@@ -230,7 +230,7 @@ command_matches = {
 		None,
 		None,
 		None,
-		None
+		datetime(2021, 4, 19, 14, 0, 0)
 	],
 	"random_animal":[
 		"random_animal",
@@ -239,7 +239,7 @@ command_matches = {
 		None,
 		None,
 		None,
-		None
-	],
+		datetime(2021, 4, 20, 14, 0, 0)
+	]
 }
 command_matches.update(extra_commands.extra_commands)

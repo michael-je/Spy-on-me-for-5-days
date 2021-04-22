@@ -67,4 +67,4 @@ def close_loop() -> None:
 	loop.close()
 
 
-set_scene('facecam')
+# set_scene('facecam')

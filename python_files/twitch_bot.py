@@ -5,6 +5,7 @@ import utilities
 import call_interface_util
 import talk_to_michael
 import extra_message_parser
+# import extra_commands
 
 
 import importlib
@@ -13,6 +14,9 @@ import re
 import os.path
 from datetime import datetime
 from time import sleep
+
+# remember last PONG message time
+last_pong = datetime.now()
 
 # chat log relative path
 chat_log_path = utilities.get_file_path(__file__, cfg.chat_log_path)
@@ -27,6 +31,7 @@ CHAT_MSG_SENDER = re.compile(r"^:\w+")
 
 
 def main() -> None:
+	global last_pong
 	utilities.set_state("terminate_flag", 0)
 	utilities.set_state("mpv_mutex", 0)
 	
@@ -36,6 +41,27 @@ def main() -> None:
 
 	while True:
 		importlib.reload(extra_message_parser)
+		
+		# check if last PONG was too long ago
+		now = datetime.now()
+		delta = now - last_pong
+		if delta.seconds >= 360:
+			last_pong = now
+			print(f"\n{datetime.now()}LAST PONG MORE THAN 6 MINUTES OLD. RECONNECTING\n")
+			s.close()
+			s = socket.socket()
+			connect(s)
+			s.setblocking(False)
+
+		# attempt to reconnect to twitch if disconnected every 2 minutes
+		time_minutes = datetime.now().minute
+		if time_minutes % 2 == 0:
+			try:
+				connect(s)
+				print(f"{datetime.now()} - Twitch bot: Reconnected")
+			except OSError:
+				pass
+
 		try:
 			# first check and and process any util commands
 			process_util_commands(s)
@@ -51,7 +77,9 @@ def main() -> None:
 				# respond to server pings to avoid disconnect
 				if raw_response == "PING :tmi.twitch.tv": # reply to server pings
 					s.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
-					print("Twitch bot: PONG sent.")
+					now = datetime.now()
+					last_pong = now
+					print(f"{now} - Twitch bot: PONG sent.")
 				
 				# process user messages
 				else:
@@ -73,6 +101,7 @@ def main() -> None:
 
 							# if message contained a relevant command then call the appropriate function to execute it
 							if cmd_info[0]:
+								# print(cmd_info, message, sender_username)
 								call_interface_util.call_interface(cmd_info, message, sender_username)
 
 		# this exception is raised if there is no data in the recv buffer,
@@ -143,8 +172,8 @@ def connect(s) -> None:
 			seperated_responses = [x for x in response_buffer.split('\r\n') if x]
 			
 			for raw_response in seperated_responses:
-				if __name__ == "__main__":
-					print(raw_response)
+				# if __name__ == "__main__":
+					# print(raw_response)
 				if raw_response == f":{cfg.NICK}.tmi.twitch.tv 366 {cfg.NICK} #{cfg.CHAN} :End of /NAMES list":
 					# s.setblocking(False)
 					print("Twitch bot connected")
@@ -180,11 +209,11 @@ def parse_commands(message, sender_username) -> list:
 				cmd_info[2] = word
 				break
 
-			elif cmd[3] and message in cmd[3]:	# check if the message matches an exact phrase
-				cmd_info[0] = cmd[0]
-				cmd_info[1] = cmd[1]
-				cmd_info[3] = word
-				break
+			# elif cmd[3] and message in cmd[3]:	# check if the message matches an exact phrase
+			# 	cmd_info[0] = cmd[0]
+			# 	cmd_info[1] = cmd[1]
+			# 	cmd_info[3] = word
+			# 	break
 
 		if cmd_info[0]:
 			break

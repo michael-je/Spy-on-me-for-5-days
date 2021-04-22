@@ -13,10 +13,13 @@ if {$force_conservative} {
 	}
 }
 
+# set variables
+set curDir [lindex $argv 0]
+set fileName [lindex $argv 1]
 
 # run mpv
 set timeout -1
-spawn mpv --ao=jack --speed=0.8 /tmp/t2s.wav
+spawn mpv --ao=jack "$curDir/$fileName"
 match_max 100000
 
 # let mpv play for a split second so that it connects with jack, then pause
