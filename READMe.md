@@ -1,5 +1,5 @@
 ## My final BA project at Catalyst Berlin
-
+#### More info available on my website: https://michaeljoseph.net/projects/spy-on-me-for-5-days/
 ---
 ### Software (Ubuntu package manager)
 - obs-studio
